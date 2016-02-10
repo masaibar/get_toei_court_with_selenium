@@ -1,0 +1,22 @@
+#!/bin/bash
+
+INPUT=$1
+LIST=$2
+OUTPUT=$3
+BASE=base
+
+if [ -e ${OUTPUT} ]; then
+	echo "clean output"
+	rm ${OUTPUT}
+fi
+
+echo "separete list"
+bin/separatelist.sh ${LIST}
+
+echo "create scenario"
+
+bin/makeBase.sh ${INPUT} ${BASE}
+bin/makeScript.sh ${BASE} ${OUTPUT}
+
+rm ${BASE}
+rm lists/*
